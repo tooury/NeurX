@@ -1,0 +1,14 @@
+* Load the circuit
+source ~/NeurX_link/NeurX_hybrid_system_v0.02.cir
+
+* Plot Specific Node Voltages
+plot v(S1) v(S3) v(C1) v(C3)
+
+* Plot Currents Through Voltage Sources
+plot i(Vstore1) i(Vcomp1)
+
+* Export Data
+write output_v0.02.dat all
+
+* End the script
+quit
