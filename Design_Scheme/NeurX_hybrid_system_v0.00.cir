@@ -1,0 +1,46 @@
+* Hybrid Memristor-Spintronics System
+
+* Power Supply
+Vdd Vdd 0 DC 1.8
+
+* Define Memristors for Storage Array
+.model MS1 memristor(Rinit=100 Roff=16k Ron=100u)
+.model MS2 memristor(Rinit=100 Roff=16k Ron=100u)
+
+* Define Memristors for Computation Array
+.model MC1 memristor(Rinit=100 Roff=16k Ron=100u)
+.model MC2 memristor(Rinit=100 Roff=16k Ron=100u)
+
+* Storage Array Configuration
+Xstore1 S1 S3 memristor MS1
+Xstore2 S1 S4 memristor MS2
+
+* Computation Array Configuration
+Xcomp1 C1 C3 memristor MC1
+Xcomp2 C1 C4 memristor MC2
+
+* Control Circuit for Storage Array Rows
+Vstore1 S1 0 PULSE(0 1.8 0 1n 1n 10n 20n)
+
+* Control Circuit for Computation Array Rows
+Vcomp1 C1 0 PULSE(0 1.8 10n 1n 1n 10n 20n)
+
+* Storage Array Columns
+Rstore1 S3 0 1k
+Rstore2 S4 0 1k
+
+* Computation Array Columns
+Rcomp1 C3 0 1k
+Rcomp2 C4 0 1k
+
+* Spintronic Elements for Logic Operations (simplified model)
+Rspin1 N5 0 500
+Rspin2 N6 0 500
+
+* Control Signals for Spintronic Elements
+Vspin1 N5 0 PULSE(0 1.8 5n 1n 1n 10n 20n)
+Vspin2 N6 0 PULSE(0 1.8 15n 1n 1n 10n 20n)
+
+* Simulation Commands
+.tran 1n 100n
+.end
